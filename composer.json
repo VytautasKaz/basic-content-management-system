@@ -1,0 +1,17 @@
+{
+    "name": "vytautas/cms",
+    "description": "content managing system",
+    "authors": [
+        {
+            "name": "VytautasKaz",
+            "email": "vytautas.kazakevicius2@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.8"
+    },
+    "autoload": {
+        "psr-4": {
+        }
+    }
+}
