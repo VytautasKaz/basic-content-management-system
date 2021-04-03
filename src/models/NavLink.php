@@ -18,9 +18,14 @@ class NavLink
     private $id;
 
     /** 
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=2000, nullable=false)
      */
     private $linkName;
+
+    /** 
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $linkContent;
 
     /**
      * Get the value of id
@@ -49,4 +54,26 @@ class NavLink
 
         return $this;
     }
+
+    /**
+     * Get the value of linkContent
+     */
+    public function getLinkContent()
+    {
+        return $this->linkContent;
+    }
+
+    /**
+     * Set the value of linkContent
+     *
+     * @return  self
+     */
+    public function setLinkContent($linkContent)
+    {
+        $this->linkContent = $linkContent;
+
+        return $this;
+    }
 }
+
+// vendor\bin\doctrine orm:schema-tool:update --force --dump-sql

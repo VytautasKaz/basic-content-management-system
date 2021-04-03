@@ -2,7 +2,7 @@
 
 use Model\NavLink;
 
-require_once "bootstrap.php";
+require_once "./bootstrap.php";
 
 $newLinkName = $argv[1];
 
