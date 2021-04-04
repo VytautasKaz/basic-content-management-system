@@ -79,17 +79,26 @@ if (isset($_GET['action']) == 'logout') {
         foreach ($nav as $link) {
 
             print('<tr>
-                        <td>' . $link->getLinkName() . '</td>
-                        <td>
-                                                    <form action="" method="POST">
-                                    <button type="submit" name="delete" value="" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                                </form>
-                                <form action="" method="POST">
-                                    <input type="hidden" name="current_name" value="" />
-                                    <button type="submit" name="edit" value="">Edit</button>
-                                </form>
+                       <td>' . $link->getLinkName() . '</td>');
+
+            $link->getId() === 1 ?
+                print('<td>
+                        <form action="" method="POST">
+                            <input type="hidden" name="current_name" value="" />
+                            <button type="submit" name="edit" value="">Edit</button>
+                        </form>
                         </td>
-                  </tr>');
+                    </tr>') :
+                print('<td>
+                            <form action="" method="POST">
+                                <input type="hidden" name="current_name" value="" />
+                                <button type="submit" name="edit" value="">Edit</button>
+                            </form>        
+                            <form action="" method="POST">
+                                <button type="submit" name="delete" value="" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                            </form>
+                       </td>
+                </tr>');
         }
         print('</table>');
     }
