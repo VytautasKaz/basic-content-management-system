@@ -84,18 +84,22 @@ if (isset($_GET['action']) == 'logout') {
             $link->getId() === 1 ?
                 print('<td>
                         <form action="" method="POST">
-                            <input type="hidden" name="current_name" value="" />
-                            <button type="submit" name="edit" value="">Edit</button>
+                            <input type="hidden" name="current_name" value="' . $link->getLinkName() . '" />
+                            <input type="hidden" name="current_content" value="' . $link->getLinkContent() . '" />
+                            <input type="hidden" name="current_id" value="' . $link->getId() . '" />
+                            <button type="submit" name="edit_pg" value="">Edit</button>
                         </form>
                         </td>
                     </tr>') :
                 print('<td>
                             <form action="" method="POST">
-                                <input type="hidden" name="current_name" value="" />
-                                <button type="submit" name="edit" value="">Edit</button>
+                                <input type="hidden" name="current_name" value="' . $link->getLinkName() . '" />
+                                <input type="hidden" name="current_content" value="' . $link->getLinkContent() . '" />
+                                <input type="hidden" name="current_id" value="' . $link->getId() . '" />
+                                <button type="submit" name="edit_pg" value="">Edit</button>
                             </form>        
                             <form action="" method="POST">
-                                <button type="submit" name="delete" value="" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                                <button type="submit" name="delete" value="' . $link->getId() . '" onclick="return confirm(\'Are you sure?\')">Delete</button>
                             </form>
                        </td>
                 </tr>');
