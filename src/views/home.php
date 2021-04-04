@@ -26,12 +26,10 @@ $nav = $entityManager->getRepository("Model\NavLink")->findAll();
                 $IdRef = null;
                 if ($link->getId() === 1) {
                     $IdRef = './';
-                    var_dump($IdRef);
                 } else {
                     $IdRef = '?pageId=' . $link->getId();
-                    var_dump($IdRef);
                 }
-                print('<li><a href="' . $IdRef . '">' . $link->getLinkName() . '</a></li><br>');
+                print('<li><a href="' . $IdRef . '">' . $link->getLinkName() . '</a></li>');
             }
             ?>
         </ul>
@@ -44,14 +42,9 @@ $nav = $entityManager->getRepository("Model\NavLink")->findAll();
         print($content->getLinkContent());
     } else if (isset($_GET['pageId'])) {
         $content = $entityManager->find('Model\NavLink', $_GET['pageId']);
+        print($content->getLinkName() . '<br>');
         print($content->getLinkContent());
     }
-
-    // if (!isset($_GET['pageId'])) {
-    //     print($nav[0]->getLinkContent());
-    // } else {
-    // }
-
     ?>
 
 </body>

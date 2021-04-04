@@ -1,6 +1,5 @@
 <?php
 ob_start();
-session_start();
 
 require_once "./bootstrap.php";
 
@@ -15,6 +14,7 @@ switch ($request) {
         require __DIR__ . '/src/views/home.php';
         break;
     case $rootDir . '/admin':
+    case $rootDir . '/admin?action=logout':
         require __DIR__ . '/src/views/admin.php';
         break;
     default:
