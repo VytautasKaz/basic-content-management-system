@@ -101,6 +101,32 @@ if (isset($_GET['action']) == 'logout') {
                 </tr>');
         }
         print('</table>');
+
+        print('<form class="new-entry" action="" method="POST">
+                    <button type="submit" name="addpage">Add New Page</button>
+                </form>');
+
+        if (isset($_POST['addpage'])) {
+            print('<form class="new-page" action="" method="POST">
+                        <label for="title">Title:</label><br>
+                        <input type="text" name="new-title"><br>
+                        <label for="content">New Content:</label><br>
+                        <input class="content-input" type="text" name="new-content"><br>
+                        <button type="submit" name="add_content">Create Page</button>
+                   </form>');
+        }
+        if (isset($_POST['add_content'])) {
+            $title = $_POST['new-title'];
+            $content = $_POST['new-content'];
+            if (!empty($title)) {
+                $newLink = new NavLink();
+                $newLink->setLinkName($title);
+                $newLink->setLinkContent($content);
+                $entityManager->persist($newLink);
+                $entityManager->flush();
+                header('Location:' . $roodDir . '/admin');
+            }
+        }
     }
 
     ?>
