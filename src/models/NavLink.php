@@ -18,12 +18,12 @@ class NavLink
     private $id;
 
     /** 
-     * @ORM\Column(type="string", length=2000, nullable=false)
+     * @ORM\Column(type="string")
      */
     private $linkName;
 
     /** 
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=2000, nullable=true)
      */
     private $linkContent;
 

@@ -1,4 +1,7 @@
 <?php
+ob_start();
+session_start();
+
 require_once "./bootstrap.php";
 
 $request = $_SERVER['REQUEST_URI'];
