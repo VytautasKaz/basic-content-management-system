@@ -6,16 +6,15 @@ require_once "./bootstrap.php";
 
 $request = $_SERVER['REQUEST_URI'];
 
-$root = '/cms';
+$rootDir = '/cms';
 
 switch ($request) {
-    case $root . '/':
+    case $rootDir:
+    case $rootDir . '/':
+    case $rootDir . '/?pageId=' . $_GET['pageId']:
         require __DIR__ . '/src/views/home.php';
         break;
-    case $root:
-        require __DIR__ . '/src/views/home.php';
-        break;
-    case $root . '/admin':
+    case $rootDir . '/admin':
         require __DIR__ . '/src/views/admin.php';
         break;
     default:

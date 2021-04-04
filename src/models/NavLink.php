@@ -50,9 +50,7 @@ class NavLink
      */
     public function setLinkName($linkName)
     {
-        $this->linkName = $linkName;
-
-        return $this;
+        return $this->linkName = $linkName;
     }
 
     /**
@@ -70,9 +68,7 @@ class NavLink
      */
     public function setLinkContent($linkContent)
     {
-        $this->linkContent = $linkContent;
-
-        return $this;
+        return $this->linkContent = $linkContent;
     }
 }
 

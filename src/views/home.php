@@ -2,6 +2,8 @@
 
 use Model\NavLink;
 
+require_once "./bootstrap.php";
+
 $nav = $entityManager->getRepository("Model\NavLink")->findAll();
 
 ?>
@@ -21,7 +23,15 @@ $nav = $entityManager->getRepository("Model\NavLink")->findAll();
         <ul>
             <?php
             foreach ($nav as $link) {
-                print('<li><a href="?pageId=' . $link->getId() . '">' . $link->getLinkName() . '</a></li><br>');
+                $IdRef = null;
+                if ($link->getId() === 1) {
+                    $IdRef = './';
+                    var_dump($IdRef);
+                } else {
+                    $IdRef = '?pageId=' . $link->getId();
+                    var_dump($IdRef);
+                }
+                print('<li><a href="' . $IdRef . '">' . $link->getLinkName() . '</a></li><br>');
             }
             ?>
         </ul>
@@ -29,10 +39,18 @@ $nav = $entityManager->getRepository("Model\NavLink")->findAll();
 
     <?php
 
-    if (!isset($_GET['pageId'])) {
-        print($nav[0]->getLinkContent());
-    } else {
+    if ($_SERVER['REQUEST_URI'] === ($rootDir . '/')) {
+        $content = $entityManager->find('Model\NavLink', 1);
+        print($content->getLinkContent());
+    } else if (isset($_GET['pageId'])) {
+        $content = $entityManager->find('Model\NavLink', $_GET['pageId']);
+        print($content->getLinkContent());
     }
+
+    // if (!isset($_GET['pageId'])) {
+    //     print($nav[0]->getLinkContent());
+    // } else {
+    // }
 
     ?>
 
