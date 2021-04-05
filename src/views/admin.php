@@ -57,43 +57,45 @@ if (isset($_POST['delete'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CMS - Admin page</title>
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/admin.css">
 </head>
 
 <body>
+    <div class="container">
+        <?php
 
-    <?php
-
-    if (!$_SESSION['logged_in']) {
-        print('<div align="center"><h4>Enter your login information</h4>
+        if (!$_SESSION['logged_in']) {
+            print('<div align="center"><h4>Enter your login information</h4>
                    <form class="login-form" action="" method="post">
                         <input type="text" name="username" placeholder="username = admin" required><br>
                         <input type="password" name="password" placeholder="password = adminpw" required><br>
                         <button class="login-btn" type="submit" name="login">Login</button>
                    </form></div>');
-    } else {
-        print('<nav>
+        } else {
+            print('<nav>
                 <ul>
                     <li><a href="./admin">Admin</a></li>
                     <li><a href="./">View Page</a></li>
                     <li><a href=?action=logout>Logout</a></li>
                 </ul>
             </nav>');
-        print('<table>
+            print('<table>
             <tr>
                 <th>Page</th>
                 <th>Actions</th>
             </tr>');
 
-        $nav = $entityManager->getRepository("Model\NavLink")->findAll();
+            $nav = $entityManager->getRepository("Model\NavLink")->findAll();
 
-        foreach ($nav as $link) {
+            foreach ($nav as $link) {
 
-            print('<tr>
+                print('<tr>
                        <td>' . $link->getLinkName() . '</td>');
 
-            $link->getId() === 1 ?
-                print('<td>
+                $link->getId() === 1 ?
+                    print('<td>
                         <form action="" method="POST">
                             <input type="hidden" name="current_name" value="' . $link->getLinkName() . '" />
                             <input type="hidden" name="current_content" value="' . $link->getLinkContent() . '" />
@@ -102,7 +104,7 @@ if (isset($_POST['delete'])) {
                         </form>
                         </td>
                     </tr>') :
-                print('<td>
+                    print('<td>
                             <form action="" method="POST">
                                 <input type="hidden" name="current_name" value="' . $link->getLinkName() . '" />
                                 <input type="hidden" name="current_content" value="' . $link->getLinkContent() . '" />
@@ -114,41 +116,41 @@ if (isset($_POST['delete'])) {
                             </form>
                        </td>
                 </tr>');
-        }
-        print('</table>');
+            }
+            print('</table>');
 
-        print('<form class="new-entry" action="" method="POST">
+            print('<form class="new-entry" action="" method="POST">
                     <button type="submit" name="addpage">Add New Page</button>
                 </form>');
 
-        // Add new page
+            // Add new page
 
-        if (isset($_POST['addpage'])) {
-            print('<form class="new-page" action="" method="POST">
+            if (isset($_POST['addpage'])) {
+                print('<form class="page_mod" action="" method="POST">
                         <label for="title">Title:</label><br>
                         <input type="text" name="new-title"><br>
                         <label for="content">New Content:</label><br>
                         <input class="content-input" type="text" name="new-content"><br>
                         <button type="submit" name="add_content">Create Page</button>
                    </form>');
-        }
-        if (isset($_POST['add_content'])) {
-            $title = $_POST['new-title'];
-            $content = $_POST['new-content'];
-            if (!empty($title)) {
-                $newLink = new NavLink();
-                $newLink->setLinkName($title);
-                $newLink->setLinkContent($content);
-                $entityManager->persist($newLink);
-                $entityManager->flush();
-                header('Location:' . $roodDir . '/admin');
             }
-        }
+            if (isset($_POST['add_content'])) {
+                $title = $_POST['new-title'];
+                $content = $_POST['new-content'];
+                if (!empty($title)) {
+                    $newLink = new NavLink();
+                    $newLink->setLinkName($title);
+                    $newLink->setLinkContent($content);
+                    $entityManager->persist($newLink);
+                    $entityManager->flush();
+                    header('Location:' . $roodDir . '/admin');
+                }
+            }
 
-        // Update page
+            // Update page
 
-        if (isset($_POST['edit_pg'])) {
-            print('<form class="new-page" action="" method="POST">
+            if (isset($_POST['edit_pg'])) {
+                print('<form class="page_mod" action="" method="POST">
                         <input type="hidden" name="current_id" value="' . $_POST['current_id'] . '">
                         <label for="title">Title:</label><br>
                         <input type="text" name="edit-title" value="' . $_POST['current_name'] . '"><br>
@@ -156,24 +158,24 @@ if (isset($_POST['delete'])) {
                         <input class="content-input" type="text" name="edit-content" value="' . $_POST['current_content'] . '"><br>
                         <button type="submit" name="update_pg">Update Page</button>
                    </form>');
-        }
-        if (isset($_POST['update_pg'])) {
-            $id = $_POST['current_id'];
-            $title = $_POST['edit-title'];
-            $content = $_POST['edit-content'];
-            if (!empty($title)) {
-                $update = $entityManager->find('Model\NavLink', $id);
-                $update->setLinkName($title);
-                $update->setLinkContent($content);
-                $entityManager->persist($update);
-                $entityManager->flush();
-                header('Location:' . $roodDir . '/admin');
+            }
+            if (isset($_POST['update_pg'])) {
+                $id = $_POST['current_id'];
+                $title = $_POST['edit-title'];
+                $content = $_POST['edit-content'];
+                if (!empty($title)) {
+                    $update = $entityManager->find('Model\NavLink', $id);
+                    $update->setLinkName($title);
+                    $update->setLinkContent($content);
+                    $entityManager->persist($update);
+                    $entityManager->flush();
+                    header('Location:' . $roodDir . '/admin');
+                }
             }
         }
-    }
 
-    ?>
-
+        ?>
+    </div>
 </body>
 
 </html>
