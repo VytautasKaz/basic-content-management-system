@@ -5,8 +5,8 @@
 A basic content management system developed using PHP ORM tools. Features:
 
 - Guest page with a navigation menu.
-- Basic authentication to access administration page, with username and password provided as placeholders in the login form.
 - Administration page, where CRUD (create, read, update, delete) operations can be performed (to reach this page, you need to add '/admin' to the address bar: http://localhost/cms/admin).
+- Basic authentication to access administration page, with username and password provided as placeholders in the login form.
 
 ## Launch instructions:
 
