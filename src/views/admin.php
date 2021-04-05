@@ -58,7 +58,7 @@ if (isset($_POST['delete'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMS - Admin page</title>
-    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/default.css">
     <link rel="stylesheet" href="./src/css/admin.css">
 </head>
 
@@ -74,13 +74,13 @@ if (isset($_POST['delete'])) {
                         <button class="login-btn" type="submit" name="login">Login</button>
                    </form></div>');
         } else {
-            print('<nav>
+            print('<header><nav>
                 <ul>
                     <li><a href="./admin">Admin</a></li>
                     <li><a href="./">View Page</a></li>
                     <li><a href=?action=logout>Logout</a></li>
                 </ul>
-            </nav>');
+            </nav></header>');
             print('<table>
             <tr>
                 <th>Page</th>
@@ -127,10 +127,10 @@ if (isset($_POST['delete'])) {
 
             if (isset($_POST['addpage'])) {
                 print('<form class="page_mod" action="" method="POST">
-                        <label for="title">Title:</label><br>
+                        <label for="title">Title</label><br>
                         <input type="text" name="new-title"><br>
-                        <label for="content">New Content:</label><br>
-                        <input class="content-input" type="text" name="new-content"><br>
+                        <label for="content">New Content</label><br>
+                        <textarea name="new-content" cols="100" rows="30"></textarea><br>
                         <button type="submit" name="add_content">Create Page</button>
                    </form>');
             }
@@ -152,10 +152,10 @@ if (isset($_POST['delete'])) {
             if (isset($_POST['edit_pg'])) {
                 print('<form class="page_mod" action="" method="POST">
                         <input type="hidden" name="current_id" value="' . $_POST['current_id'] . '">
-                        <label for="title">Title:</label><br>
+                        <label for="title">Title</label><br>
                         <input type="text" name="edit-title" value="' . $_POST['current_name'] . '"><br>
-                        <label for="content">Page Content:</label><br>
-                        <input class="content-input" type="text" name="edit-content" value="' . $_POST['current_content'] . '"><br>
+                        <label for="content">Page Content</label><br>
+                        <textarea name="edit-content" cols="100" rows="30">' . $_POST['current_content'] . '</textarea><br>
                         <button type="submit" name="update_pg">Update Page</button>
                    </form>');
             }
