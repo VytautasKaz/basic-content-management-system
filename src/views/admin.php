@@ -37,6 +37,17 @@ if (isset($_GET['action']) == 'logout') {
     print('<script type="text/javascript">alert("You have been logged out successfully.");</script>');
     header('Location:' . $roodDir . '/admin');
 }
+
+// Delete page logic
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete'];
+    $update = $entityManager->find('Model\NavLink', $id);
+    $entityManager->remove($update);
+    $entityManager->flush();
+    header('Location:' . $roodDir . '/admin');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -110,6 +121,8 @@ if (isset($_GET['action']) == 'logout') {
                     <button type="submit" name="addpage">Add New Page</button>
                 </form>');
 
+        // Add new page
+
         if (isset($_POST['addpage'])) {
             print('<form class="new-page" action="" method="POST">
                         <label for="title">Title:</label><br>
@@ -127,6 +140,32 @@ if (isset($_GET['action']) == 'logout') {
                 $newLink->setLinkName($title);
                 $newLink->setLinkContent($content);
                 $entityManager->persist($newLink);
+                $entityManager->flush();
+                header('Location:' . $roodDir . '/admin');
+            }
+        }
+
+        // Update page
+
+        if (isset($_POST['edit_pg'])) {
+            print('<form class="new-page" action="" method="POST">
+                        <input type="hidden" name="current_id" value="' . $_POST['current_id'] . '">
+                        <label for="title">Title:</label><br>
+                        <input type="text" name="edit-title" value="' . $_POST['current_name'] . '"><br>
+                        <label for="content">Page Content:</label><br>
+                        <input class="content-input" type="text" name="edit-content" value="' . $_POST['current_content'] . '"><br>
+                        <button type="submit" name="update_pg">Update Page</button>
+                   </form>');
+        }
+        if (isset($_POST['update_pg'])) {
+            $id = $_POST['current_id'];
+            $title = $_POST['edit-title'];
+            $content = $_POST['edit-content'];
+            if (!empty($title)) {
+                $update = $entityManager->find('Model\NavLink', $id);
+                $update->setLinkName($title);
+                $update->setLinkContent($content);
+                $entityManager->persist($update);
                 $entityManager->flush();
                 header('Location:' . $roodDir . '/admin');
             }
