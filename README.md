@@ -13,6 +13,9 @@ A basic content management system developed using PHP ORM tools. Features:
 - Clone this repository or download it as a ZIP package.
 - Clone/extract it to your AMPPS (.../AMPPS/www/), XAMPP or other web server platform directory.
 - **_Make sure that the downloaded/cloned repository folder is named 'cms'._**
+- If needed, install composer (installation instructions: https://getcomposer.org/download) and using terminal download Doctrine ORM:
+  - if composer is installed locally: php <'path to composer.phar file location'>/composer.phar require doctrine/orm
+  - if composer is installed on your system globally: composer require doctrine/orm
 - Import 'cms_db.sql' database into your local MySQL server.
 - Open the app via your preferred web browser (http://localhost/cms/).
 
